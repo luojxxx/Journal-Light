@@ -1,0 +1,507 @@
+/*===============================================*/
+/* GLOBAL STYLES */
+button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #8c8c8c;
+  border-radius: 5px;
+  background: #f4f5f7;
+  font-size: 16px;
+  font-color: #8c8c8c;
+  padding-top: 0.01em;
+  padding-bottom: 0.01em;
+}
+
+div {
+    white-space: pre-wrap;
+}
+
+body {
+  max-height: 100vh;
+  /*overflow: hidden;*/
+}
+
+canvas {
+  border: 0;
+  margin: 0;
+}
+
+/*===============================================*/
+/* STYLES FOR MAIN CHAT APP WINDOW */
+.homeContainer {
+  overflow: scroll;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.homeContent{
+}
+
+.homeImage {
+  width: 100%;
+}
+
+.loginArea{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.loginButton {
+  display: inline-block;
+  color:white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #0077E0;
+}
+
+.loginButton:hover {
+  color:white;
+  cursor: pointer;
+}
+
+.appContainer {
+  overflow: hidden;
+  min-height: calc(100vh - 20px);
+  max-height: calc(100vh - 20px);
+  width: 800px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.header{
+  flex: 0 0 auto;
+}
+
+.text-muted {
+    padding-top: 15px;
+}
+
+.logo {
+  display: none;
+}
+
+.clearFloat {
+  clear: right;
+  margin: 0px;
+}
+
+
+.searchBar {
+  flex: 0 0 auto;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background: #f4f5f7;
+  resize: none;
+  font-size: 16px;
+  margin-bottom: 1%;
+}
+
+.windowScrollBarContainer {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.windowStyle {
+  width: 96%;
+  display: flex;
+  flex-direction: column;
+  background: #f4f5f7;
+  overflow:hidden;
+}
+
+.inner {
+  overflow:scroll;
+  /*height: 100%;*/
+  flex: 1 1 auto;
+  /*min-height: 70vh;*/
+  /*max-height: 70vh;*/
+  margin:0px -300px 0px 0px;
+  padding-right:300px;
+}
+
+.scrollBar {
+  width: 3%;
+  background: lightblue;
+  margin-left: 1%;
+/*  margin-right: 1%;*/
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.modal-open {
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
+.modal-dialog {
+  margin: auto;
+  right: 0px;
+  left: 0px;
+}
+
+.flexboxGap{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/*===============================================*/
+/* STYLES FOR INDIVIDUAL INPUTS AND COMPONENTS*/
+.fullEntryDiv {
+  /*position: absolute;*/
+/*    padding-bottom: 30px;*/
+/*    background: grey*/
+}
+
+.addButton {
+  text-align: center;
+  cursor: pointer;
+}
+
+.handleEntryDiv {
+  width:100%;
+  display: flex;
+  align-items: center;
+}
+
+.handle  {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.deleteButton {
+  float: right;
+  position: relative;
+  top: 2px;
+}
+
+.entryDateContent {
+  width:100%;
+  flex-direction: column;
+}
+
+.formDivStyle {
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-size: 18px;
+}
+
+.formSpanStyle {
+  vertical-align: -5%;
+}
+
+.prettyDateStyle {
+  background: transparent;
+  font-size: 18px;
+  border: none;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-radius: 0;
+  width: 100%;
+}
+
+.styleSelect select {
+  background: transparent;
+  font-size: 18px;
+  color: #333333;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 0;
+  margin: none;
+  padding: none;
+  -webkit-appearance: none;
+}
+
+
+.inputTextareaStyle {
+    width: 100%;
+    border: none;
+    background: transparent;
+    resize: none;
+    font-size: 16px;
+}
+
+.inputFillerTextareaStyle {
+  width: 100%;
+  border: none;
+  padding:  2px;
+  background: transparent;
+  resize: none;
+  font-size: 16px;
+}
+
+.inputResponseStyle {
+    white-space: pre-wrap;
+    font-size: 16px;
+    color: #8c8c8c;
+    overflow-wrap: normal;
+}
+
+.videoStyle {
+  /*height:100%;*/
+  width: 100%;
+    /*max-width: 80%;*/
+  max-height: 80vh;
+}
+
+
+
+.hide {
+  display: hide;
+}
+
+.dateFormBlockIfCramped {
+  display: inline;
+}
+
+/*===============================================*/
+/* STYLES FOR MISCS ITEMS */
+
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  display: none;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+.react-toggle {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-toggle-screenreader-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.react-toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.25s;
+  transition: opacity 0.25s;
+}
+
+.react-toggle-track {
+  width: 50px;
+  height: 24px;
+  padding: 0;
+  border-radius: 30px;
+  background-color: #4D4D4D;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #000000;
+}
+
+.react-toggle--checked .react-toggle-track {
+  background-color: #19AB27;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #128D15;
+}
+
+.react-toggle-track-check {
+  position: absolute;
+  width: 14px;
+  height: 10px;
+  top: 0px;
+  bottom: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 0;
+  left: 8px;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-track-check {
+  opacity: 1;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+
+.react-toggle-track-x {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 0px;
+  bottom: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 0;
+  right: 10px;
+  opacity: 1;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-track-x {
+  opacity: 0;
+}
+
+.react-toggle-thumb {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #4D4D4D;
+  border-radius: 50%;
+  background-color: #FAFAFA;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-thumb {
+  left: 27px;
+  border-color: #19AB27;
+}
+
+.react-toggle--focus .react-toggle-thumb {
+/*  -webkit-box-shadow: 0px 0px 3px 2px #0099E0;
+  -moz-box-shadow: 0px 0px 3px 2px #0099E0;
+  box-shadow: 0px 0px 2px 3px #0099E0;*/
+}
+
+.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {
+/*  -webkit-box-shadow: 0px 0px 5px 5px #0099E0;
+  -moz-box-shadow: 0px 0px 5px 5px #0099E0;
+  box-shadow: 0px 0px 5px 5px #0099E0;*/
+}
+
+/*===============================================*/
+/* STYLES FOR RESPONSIVE DESIGN */
+@media screen and (max-width: 700px) {
+  body{
+    /*max-height: 89vh;*/
+    width:100%;
+    position: fixed;
+    top:0;
+    bottom: 0;
+  }
+
+  .homeContainer {
+    width: 98%;
+    margin: auto;
+  }
+
+  .loginArea{
+    width: 100%;
+  }
+
+  .appContainer {
+    min-height: calc(100vh - 20px);
+    max-height: calc(100vh - 20px);
+    width: 98%;
+    margin: auto;
+  }
+
+  .text-muted {
+    display: none;
+  }
+
+  .header {
+    padding: 0px;
+    border: 0px;
+  }
+
+  ul.nav.nav-pills.pull-right::before {
+    display: none;
+  }
+  ul.nav.nav-pills.pull-right::after {
+    display: none;
+  }
+
+  .scrollBar {
+    width: 30px;
+  }
+
+  .dateFormBlockIfCramped {
+    display: block;
+  }
+
+  #dateformButtonBlock{
+    margin-top: 5px;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  @media screen and (max-width: 370px) {
+    .nav{
+      font-size: 12px;
+    }
+  }
+  
+}

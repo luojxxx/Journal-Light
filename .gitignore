@@ -1,0 +1,21 @@
+*.pyc
+application.config
+development.config
+.elasticbeanstalk/
+release/
+.idea/
+Dockerrun.local.json
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+# Other files
+.DS_Store.
+images/.DS_Store
+images/cuddling/.DS_Store
+images/funny/.DS_Store
+database_examples.py
+frontend/node_modules/*
+*.json
+!google_api_creds.json
+!app.json
