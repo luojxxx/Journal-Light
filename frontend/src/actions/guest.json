@@ -1,0 +1,25 @@
+{
+  "dataOrder": [
+    109252
+  ],
+  "dataById": {
+    "109252": {
+      "data_id": 109252,
+      "datetime_code": [
+        2017,
+        6,
+        1,
+        0,
+        0,
+        0
+      ],
+      "datetime_milli": 1496275200000,
+      "datetime_precision": "month",
+      "content": "Welcome to Journal Light! Feel free to create new entries, upload photos, etc \n\nQuick Getting Started:\n-Click the <+> buttons to add new entries\n-Double click the text area to edit the entry text\n-Click on the date to edit the date, and selecting the '-' dash symbol leaves it undefined \n-Clicking on the date provides four options: OK date changes, Cancel date changes, Upload Media for Entry, and Delete Entry\n-Dragging and dropping multiple media files onto a journal entry also works\n-To rearrange entries use the 8-dot handle bar on the left of the entry\n-Blue scroll bar on the right lets you click to a specific journal entry, which are represented by black marks. The top of the scrollbar is the most recent whereas the bottom is the oldest. (Needs at least two journal entries with at least the year to work)\n-Companion AI is activated via the Settings button up top. (AI does not work in guest mode)",
+      "media": [],
+      "ai_response": [
+        
+      ]
+    }
+  }
+}
