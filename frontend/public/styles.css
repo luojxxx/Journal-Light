@@ -28,8 +28,11 @@ canvas {
 /*===============================================*/
 /* STYLES FOR MAIN CHAT APP WINDOW */
 .homeContainer {
-  height: 100vh;
+  height: 95vh;
   overflow: scroll;
+}
+
+.homeWrapper {
   width: 800px;
   margin-left: auto;
   margin-right: auto;

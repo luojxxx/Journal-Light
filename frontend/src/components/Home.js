@@ -5,6 +5,7 @@ class Home extends Component {
   render() {
     return (
       <div className='homeContainer'>
+      <div className='homeWrapper'>
         <h3>Journal Light</h3> <br/>
         
       <div className='homeContent'>
@@ -31,6 +32,7 @@ class Home extends Component {
         </div>
 
         <img className='homeImage' src={fullpage} /> <br/>
+      </div>
       </div>
       </div>
     );
