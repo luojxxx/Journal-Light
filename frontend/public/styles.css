@@ -26,20 +26,22 @@ canvas {
 }
 
 /*===============================================*/
-/* STYLES FOR MAIN CHAT APP WINDOW */
+/* STYLES FOR HOMEPAGE */
 .homeContainer {
   height: 95vh;
   overflow: scroll;
 }
 
 .homeWrapper {
-  width: 800px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
 #homeRuler{
+  height: 1px;
+  width: 100%;
   margin-top: 0px;
   margin-bottom: 10px;
 }
@@ -55,7 +57,7 @@ canvas {
   margin-top:0px;
 }
 
-.loginTextArea{
+.homeHeader{
   text-align: left;
 }
 
@@ -66,9 +68,14 @@ canvas {
   align-content: flex-start;
 }
 
-#featureList {
+#featureListArea {
   flex: 0 1 50%;
   text-align: left;
+  margin-right: 5px;
+}
+
+#featureList {
+  padding-left: 20px;
 }
 
 #buttonArea{
@@ -101,6 +108,8 @@ canvas {
   width: 100%;
 }
 
+/*===============================================*/
+/* STYLES FOR MAIN CHAT APP WINDOW */
 .appContainer {
   overflow: hidden;
   min-height: calc(100vh - 20px);
@@ -111,13 +120,15 @@ canvas {
   flex-direction: column;
 }
 
-
 .header{
   flex: 0 0 auto;
+  margin-top: 5px;
 }
 
 .text-muted {
-    padding-top: 15px;
+  padding-top: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .logo {
@@ -129,7 +140,6 @@ canvas {
   margin: 0px;
 }
 
-
 .searchBar {
   flex: 0 0 auto;
   width: 100%;
@@ -138,7 +148,7 @@ canvas {
   background: #f4f5f7;
   resize: none;
   font-size: 16px;
-  margin-bottom: 1%;
+  margin-bottom: 5px;
 }
 
 .windowScrollBarContainer {
@@ -148,17 +158,17 @@ canvas {
 }
 
 .windowStyle {
-  width: 96%;
   display: flex;
   flex-direction: column;
-  background: #f4f5f7;
   overflow:hidden;
+  background: #f4f5f7;
+  width: 96%;
 }
 
 .inner {
+  flex: 1 1 auto;
   overflow:scroll;
   /*height: 100%;*/
-  flex: 1 1 auto;
   /*min-height: 70vh;*/
   /*max-height: 70vh;*/
   margin:0px -300px 0px 0px;
@@ -168,7 +178,7 @@ canvas {
 .scrollBar {
   width: 3%;
   background: lightblue;
-  margin-left: 1%;
+  margin-left: 5px;
 /*  margin-right: 1%;*/
   padding-top: 0;
   padding-bottom: 0;
@@ -296,8 +306,6 @@ canvas {
     /*max-width: 80%;*/
   max-height: 80vh;
 }
-
-
 
 .hide {
   display: hide;
@@ -484,18 +492,13 @@ canvas {
     bottom: 0;
   }
 
-  .homeContainer {
-    width: 98%;
-    margin: auto;
-  }
-
   #buttonArea {
     text-align: center;
   }
 
   .appContainer {
-    min-height: calc(100vh - 20px);
-    max-height: calc(100vh - 20px);
+    min-height: calc(100vh - 70px);
+    max-height: calc(100vh - 70px);
     width: 98%;
     margin: auto;
   }

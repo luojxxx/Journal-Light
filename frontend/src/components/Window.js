@@ -184,7 +184,13 @@ export default class Window extends React.Component{
                     nextEnd = dataOrder.length;
                 }
             }
+
+            if (Math.abs(nextStart - nextEnd) < windowSize*2) {
+                nextStart = 0;
+                nextEnd = windowSize*2;
+            }
             this.scrollDirection = 'up';
+            // console.log(nextStart, nextEnd, 'up')
             this.setState({ windowStart : nextStart, windowEnd: nextEnd });
         }
 
@@ -200,7 +206,14 @@ export default class Window extends React.Component{
                     nextStart = 0;
                 }
             }
+
+            if (Math.abs(nextStart - nextEnd) < windowSize*2) {
+                nextStart = 0;
+                nextEnd = windowSize*2;
+            }
+
             this.scrollDirection = 'down';
+            // console.log(nextStart, nextEnd, 'down')
             this.setState({ windowStart : nextStart, windowEnd: nextEnd });
         }
 
@@ -366,17 +379,17 @@ export default class Window extends React.Component{
         //     this.restoring = false;
         // }
 
-        if (this.props.searching === true && this.searching === false) {
-            this.storedState.start = this.state.windowStart;
-            this.storedState.end = this.state.windowEnd;
-            this.setState({windowStart:0, windowEnd: this.windowSize * 2 });
-        }
+        // if (this.props.searching === true && this.searching === false) {
+        //     this.storedState.start = this.state.windowStart;
+        //     this.storedState.end = this.state.windowEnd;
+        //     this.setState({windowStart:0, windowEnd: this.windowSize * 2 });
+        // }
 
-        if (this.props.searching === false && this.searching === true) {
-            this.setState({ windowStart: 0, windowEnd: this.windowSize * 2 });
-            // this.setState({ windowStart: this.storedState.start, windowEnd: this.storedState.end });
-            // this.restoring = true;
-        }
+        // if (this.props.searching === false && this.searching === true) {
+        //     this.setState({ windowStart: 0, windowEnd: this.windowSize * 2 });
+        //     // this.setState({ windowStart: this.storedState.start, windowEnd: this.storedState.end });
+        //     // this.restoring = true;
+        // }
 
         if (this.props.searching === true) {
             this.scrollDirection = null;
@@ -390,6 +403,10 @@ export default class Window extends React.Component{
         }
 
         this.renderTimeline( this.props.timelineMapping );
+    }
+
+    lastAddEntryWindowShift(evt) {
+        this.setState({windowStart: this.state.windowStart, windowEnd: this.state.windowEnd+1});
     }
 
     render() {
@@ -428,12 +445,16 @@ export default class Window extends React.Component{
                                 newEntryDividerLength={this.props.newEntryDividerLength} />) 
                         }.bind(this))}
                     </div>
-                    <NewEntry 
-                    addEntry={ChatAppActions.addEntry} 
-                    idx={999999999} 
-                    setScrollNull={this.setScrollNull} 
-                    searching={this.props.searching} 
-                    newEntryDividerLength={this.props.newEntryDividerLength}/>
+
+                    <div onClick={(evt)=>this.lastAddEntryWindowShift(evt)}>
+                        <NewEntry 
+                        addEntry={ChatAppActions.addEntry} 
+                        idx={999999999} 
+                        setScrollNull={this.setScrollNull} 
+                        searching={this.props.searching} 
+                        newEntryDividerLength={this.props.newEntryDividerLength} />
+                    </div>
+
                 </div>
                 </div>
 

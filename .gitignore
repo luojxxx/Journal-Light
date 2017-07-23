@@ -18,3 +18,4 @@ database_examples.py
 frontend/node_modules/*
 !google_api_creds.json
 !app.json
+frontend/build/*

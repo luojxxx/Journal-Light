@@ -72,18 +72,18 @@ export default class Input extends React.Component{
 
         this.props.loadedComponentCallback();
 
-        document.getElementById('dragHandle'+dataId.toString()).addEventListener("touchmove", function(e){
-                    e.preventDefault();
-                });        
+        // document.getElementById('dragHandle'+dataId.toString()).addEventListener("touchmove", function(e){
+        //             e.preventDefault();
+        //         });        
     }
 
     componentWillUnmount(){
         MediaStore.removeListener("change", this.loadMedia );
 
         const dataId = this.props.id;
-        document.getElementById('dragHandle'+dataId.toString()).removeEventListener("touchmove", function(e){
-                    e.preventDefault();
-                });
+        // document.getElementById('dragHandle'+dataId.toString()).removeEventListener("touchmove", function(e){
+        //             e.preventDefault();
+        //         });
     }
 
     downloadFile(fileName, stream) {
