@@ -57,9 +57,10 @@
         arr[ele] = fillZero( dateTimeArray[ele] );
       }
 
-      var dateTimeIso = +new Date(arr[0]+'-'+arr[1]+'-'+arr[2]+'T'+arr[3]+':'+arr[4]+':'+arr[5]+'+0000');
+      // var dateTimeIso = +new Date(arr[0]+'-'+arr[1]+'-'+arr[2]+'T'+arr[3]+':'+arr[4]+':'+arr[5]+'+0000');
+      var isoTime = Date.UTC(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]);
 
-      return dateTimeIso;
+      return isoTime;
   }
 
   export function parseDateTime(dateTimeCode) {

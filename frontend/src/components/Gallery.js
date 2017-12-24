@@ -1,5 +1,5 @@
 import React from 'react';
-import Lightbox from 'react-images-jhl';
+import Lightbox from 'react-images-and-video';
 import * as ChatAppActions from "../actions/ChatAppActions";
 
 // Gallery image style

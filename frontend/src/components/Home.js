@@ -28,7 +28,7 @@ class Home extends Component {
           <div id='buttonArea'>
             <h3 className='loginButtonWrap'><a className='loginButton' onClick={this.props.route.auth.login}>Login via Dropbox</a></h3> 
             <h3 className='loginButtonWrap'><a className='loginButton' onClick={this.props.route.auth.guestLogin}>Login via Guest</a></h3>
-            <span>*Primarily Chrome Support*</span>
+            <span>*Primarily Desktop Support*</span>
           </div>
         </div>
 
