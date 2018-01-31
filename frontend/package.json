@@ -48,8 +48,6 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "auth0-js": "^7.6.0",
-    "auth0-lock": "^10.7.2",
     "dom-autoscroller": "^2.3.0",
     "dragula": "^3.7.2",
     "flux": "^3.1.0",
