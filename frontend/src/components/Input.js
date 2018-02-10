@@ -1,5 +1,5 @@
 import React from 'react';
-import Textarea from 'react-textarea-autosize';
+ var Textarea = require('react-textarea-autosize').default;
 import NewEntry from './NewEntry';
 import PrettyDate from './PrettyDate';
 import DateForm from './DateForm';
@@ -273,8 +273,8 @@ export default class Input extends React.Component{
                              className='inputTextareaStyle'
                              onChange={(evt) => ChatAppActions.handleUserInput(dataId, evt)} 
                              onFocus={(evt) => this.handleTextAreaFocus()}
-                             onBlur={(evt) => this.handleTextAreaBlur()} >
-                             </Textarea>) :
+                             onBlur={(evt) => this.handleTextAreaBlur()} />
+                             ) :
                              (<div 
                                 className='inputFillerTextareaStyle' 
                                 style={{opacity: opacity}}
