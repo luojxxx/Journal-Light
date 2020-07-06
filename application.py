@@ -29,7 +29,7 @@ import sendgrid
 from sendgrid.helpers.mail import *
 
 # import twilio.twiml
-import test_responselogic
+import responselogic
 
 
 # Getting server filepath
