@@ -293,7 +293,7 @@ export default class Input extends React.Component{
                   ) : (
                     <div
                       className="inputFillerTextareaStyle"
-                      style={{ opacity: opacity, backgroundColor: "red" }}
+                      style={{ opacity: opacity }}
                       onClick={this.handleTextAreaEditing}
                     >
                       {this.props.entrydata.content}
