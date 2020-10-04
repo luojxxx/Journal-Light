@@ -1,5 +1,5 @@
 import React from 'react';
- var Textarea = require('react-textarea-autosize').default;
+import TextareaAutosize from 'react-textarea-autosize';
 import NewEntry from './NewEntry';
 import PrettyDate from './PrettyDate';
 import DateForm from './DateForm';
@@ -239,70 +239,88 @@ export default class Input extends React.Component{
       }
 
         return (
-            <div className='fullEntryDiv' id={this.props.id}>
+          <div className="fullEntryDiv" id={this.props.id}>
+            <NewEntry
+              addEntry={ChatAppActions.addEntry}
+              idx={idx}
+              setScrollNull={this.props.setScrollNull}
+              searching={this.props.searching}
+              newEntryDividerLength={this.props.newEntryDividerLength}
+            />
 
-                <NewEntry 
-                addEntry={ChatAppActions.addEntry} 
-                idx={idx} 
-                setScrollNull={this.props.setScrollNull} 
-                searching={this.props.searching}
-                newEntryDividerLength={this.props.newEntryDividerLength} />
+            <div className="handleEntryDiv">
+              {this.props.searching === false ? (
+                <img
+                  className="handle"
+                  id={"dragHandle" + dataId.toString()}
+                  src={dragHandle}
+                  width="35em"
+                  height="auto"
+                  alt="dragHandle"
+                />
+              ) : (
+                <img
+                  src={dragHandle}
+                  style={{ opacity: "0" }}
+                  width="35em"
+                  height="auto"
+                  alt="dragHandle"
+                />
+              )}
 
-                    <div className='handleEntryDiv'>
+              <div className="entryDateContent">
+                <Dropzone
+                  ref={(node) => {
+                    this.dropzone = node;
+                  }}
+                  onDrop={this.onDZDrop}
+                  disableClick={true}
+                  style={style}
+                  activeStyle={activeStyle}
+                >
+                  {this.renderDateOrForm()}
 
-                        { (this.props.searching === false) ?
-                            <img className='handle' id={'dragHandle'+dataId.toString()} src={dragHandle} 
-                            width='35em' height='auto' alt='dragHandle'/> :
-                            <img src={dragHandle} 
-                            style={{opacity:'0'}} width='35em' height='auto' alt='dragHandle' />}
-
-                        <div className='entryDateContent'>
-                            
-                            <Dropzone 
-                            ref={(node) => { this.dropzone = node; }} 
-                            onDrop={this.onDZDrop} 
-                            disableClick={true} 
-                            style={style}
-                            activeStyle={activeStyle} >
-
-                            {this.renderDateOrForm()}
-
-                             { (this.state.editing === true) ?
-                             (<Textarea 
-                             value={this.props.entrydata.content} 
-                             className='inputTextareaStyle'
-                             onChange={(evt) => ChatAppActions.handleUserInput(dataId, evt)} 
-                             onFocus={(evt) => this.handleTextAreaFocus()}
-                             onBlur={(evt) => this.handleTextAreaBlur()} />
-                             ) :
-                             (<div 
-                                className='inputFillerTextareaStyle' 
-                                style={{opacity: opacity}}
-                                onClick={this.handleTextAreaEditing} >{this.props.entrydata.content}{emptyMsg} &nbsp;</div>) }
-
-                             { (this.state.focusing === true) ?
-                             (<ResponseBox 
-                             className='inputResponseStyle' 
-                             dataId={dataId}
-                             entryContent={this.props.entrydata.content}
-                             priorResponse={this.props.entrydata.ai_response} />) :
-                             <span className='inputResponseStyle'>&nbsp;</span> }
-
-                             
-                             <Gallery 
-                             photos={PHOTO_SET} 
-                             dataId={this.props.entrydata.data_id} />
-                             
-                             </Dropzone>
-
-                             
-                             
-                         </div>
-
+                  {this.state.editing === true ? (
+                    <TextareaAutosize
+                      value={this.props.entrydata.content}
+                      className="inputTextareaStyle"
+                      onChange={(evt) =>
+                        ChatAppActions.handleUserInput(dataId, evt)
+                      }
+                      onFocus={(evt) => this.handleTextAreaFocus()}
+                      onBlur={(evt) => this.handleTextAreaBlur()}
+                    />
+                  ) : (
+                    <div
+                      className="inputFillerTextareaStyle"
+                      style={{ opacity: opacity, backgroundColor: "red" }}
+                      onClick={this.handleTextAreaEditing}
+                    >
+                      {this.props.entrydata.content}
+                      {emptyMsg} &nbsp;
                     </div>
+                  )}
 
-             </div>
-            );
+                  {this.state.focusing === true ? (
+                    <ResponseBox
+                      className="inputResponseStyle"
+                      dataId={dataId}
+                      entryContent={this.props.entrydata.content}
+                      priorResponse={this.props.entrydata.ai_response}
+                    />
+                  ) : (
+                    <span className="inputResponseStyle">&nbsp;</span>
+                  )}
+
+                  <Gallery
+                    photos={PHOTO_SET}
+                    dataId={this.props.entrydata.data_id}
+                  />
+                </Dropzone>
+              </div>
+            </div>
+          </div>
+        );
     }
 };
 
