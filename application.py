@@ -28,13 +28,13 @@ load_dotenv()
 scriptpath = os.path.dirname(os.path.realpath(__file__))
 
 # Create the Flask app
-app = flask.Flask(__name__)
-app.config['DEBUG'] = os.getenv('FLASK_DEBUG') == 'true'
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-cors = CORS(app, origins=os.getenv('ORIGIN') )
+application = flask.Flask(__name__)
+application.config['DEBUG'] = os.getenv('FLASK_DEBUG') == 'true'
+application.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+cors = CORS(application, origins=os.getenv('ORIGIN') )
 
 # #Response AI functions
-@app.route('/api/v2/response',methods=['POST'])
+@application.route('/api/v2/response',methods=['POST'])
 def apiResponse():
     postData = request.form
     entryValue = str(postData['entryValue'])
@@ -44,4 +44,4 @@ def apiResponse():
 
 # App stuff
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    application.run(host='0.0.0.0', port=5000)
