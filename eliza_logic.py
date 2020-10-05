@@ -1,36 +1,6 @@
-import random
 import re
-import json
-import sys
-import os
-import io
+import random
 
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lsa import LsaSummarizer as Summarizer
-from sumy.nlp.stemmers import Stemmer
-from sumy.utils import get_stop_words
-
-from googleapiclient import discovery
-import httplib2
-from oauth2client.client import GoogleCredentials
- 
-scriptpath = os.path.dirname(os.path.realpath(__file__))
-
-import nltk
-nltk.data.path.append('/app/nltk_data')
-
-def readFile(filepath):
-    with io.open(filepath, 'r', encoding='utf8') as f:
-        content = f.read().splitlines()
-    return content
-
-def journalStarterResponse(scriptpath):
-    journalStarters = readFile( os.path.join(scriptpath, 'misc', 'journalstarters.txt') )
-    randomStarter = random.choice(journalStarters)
-    return randomStarter
-
- # Eliza specific code
 reflections = {
     "am": "are",
     "was": "were",
@@ -235,148 +205,18 @@ psychobabble = [
       "Please consider whether you can answer your own question.",
       "Perhaps the answer lies within yourself?",
       "Why don't you tell me?"]]
- 
-    # [r'(.*)',
-     # ["Please tell me more.",
-     #  "Can you elaborate on that?",
-     #  "Why do you say that {0}?",
-     #  "How come?",
-     #  "Why's that?",
-     #  "What else?",
-     #  "What did you learn?",
-     #  "What does that suggest to you?",
-     #  "Can you tell me why? {0}.",
-     #  "I see.  And what does that tell you?",
-     #  "How does that make you feel?",
-     #  "How do you feel when you say that?"]]
 ]
- 
- 
+
 def reflect(fragment):
     tokens = fragment.lower().split()
     for i, token in enumerate(tokens):
         if token in reflections:
             tokens[i] = reflections[token]
     return ' '.join(tokens)
- 
- 
+
 def eliza_analyze(statement):
     for pattern, responses in psychobabble:
         match = re.match(pattern, statement.rstrip(".!"))
         if match:
             response = random.choice(responses)
-            return { 'responseType': 'cont_specific', 'response': response.format(*[reflect(g) for g in match.groups()]) }
-
-# Sumy specific code
-LANGUAGE = "english"
-stemmer = Stemmer('english')
-summarizer = Summarizer(stemmer)
-summarizer.stop_words = get_stop_words(LANGUAGE)
-
-def summarize(text):
-  parser = PlaintextParser(text, Tokenizer(LANGUAGE))
-  summary_one = [str(sentence) for sentence in summarizer(parser.document, 1)]
-  summary_one = str(' '.join(summary_one))
-  return summary_one
-
-# Google Natural Language Processing API code
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] =  os.path.join(scriptpath, 'google_api_creds.json')
-
-def get_service():
-    credentials = GoogleCredentials.get_application_default()
-    scoped_credentials = credentials.create_scoped(
-        ['https://www.googleapis.com/auth/cloud-platform'])
-    http = httplib2.Http()
-    scoped_credentials.authorize(http)
-    return discovery.build('language', 'v1beta1', http=http)
-
-def get_native_encoding_type():
-    """Returns the encoding type that matches Python's native strings."""
-    if sys.maxunicode == 65535:
-        return 'UTF16'
-    else:
-        return 'UTF32'
-
-def analyze_sentiment(text):
-    body = {
-        'document': {
-            'type': 'PLAIN_TEXT',
-            'content': text,
-        }
-    }
-
-    service = get_service()
-
-    request = service.documents().analyzeSentiment(body=body)
-    response = request.execute()
-
-    return response
-
-# FUSION Method
-def responselogic(textinput):
-    #Split input into a list of sentences and limit to just last 10 sentences
-    sentence_list = [sentence for sentence in textinput.split('.') if sentence != '']
-    sentence_list = sentence_list[-10:]
-
-    #If input is empty or on a new paragraph, then return a journal starter
-    if len(sentence_list) == 0:
-        return { 'responseType': 'starter', 'response': journalStarterResponse(scriptpath) }
-    elif sentence_list[-1] == '\n':
-        return { 'responseType': 'starter', 'response': journalStarterResponse(scriptpath) }
-
-    # If there's a hit on the eliza matching, return that
-    lastSentenceResponse = eliza_analyze( sentence_list[-1].lstrip() )
-    if lastSentenceResponse != None:
-      return lastSentenceResponse
-
-    # Randomly pick one of three branchs of response: random continuation, important summary, or generic summary
-    randomInt = random.randint(0,2)
-    bufferBeginning = random.choice([ 'Why do you say "',
-     'Can you tell me how you felt when you said "',
-     'What did you learn when you said "' ])
-
-    continuations = ["Please tell me more.",
-                                    "Can you elaborate on that?",
-                                    # "Why do you say that {0}?",
-                                    "How come?",
-                                    "Why's that?",
-                                    "What else?",
-                                    "What did you learn?",
-                                    "What does that suggest to you?",
-                                    # "Can you tell me why? {0}.",
-                                    "I see.  And what does that tell you?",
-                                    "How does that make you feel?",
-                                    "How do you feel when you say that?"]
-
-    if randomInt == 0:
-        return { 'responseType': 'cont', 'response': random.choice(continuations) }
-
-    #Generate a summary of the input
-    textSegment = str('.'.join(sentence_list))
-    summary_one = summarize(textSegment)
-
-    #Analyze the summary and the individual sentences of the input for the sentiment magnitude
-    summary_magnitude = analyze_sentiment(summary_one)['documentSentiment']['magnitude']
-    sentence_list_magnitude = [analyze_sentiment(sentence)['documentSentiment']['magnitude'] for sentence in sentence_list]
-
-    #If the individual sentence magnitude is greater than the summary magnitude, it's an important sentence
-    important_sentences = []
-    for idx, sentence_magnitude in enumerate(sentence_list_magnitude):
-        # print sentence_magnitude, sentence_list[idx]
-        if sentence_magnitude > summary_magnitude:
-            important_sentences.append(idx)
-
-    if randomInt == 1:
-        allImportantSentenceString = str('.'.join([ sentence_list[idx] for idx in important_sentences]))
-        importantSummary = summarize( allImportantSentenceString )
-
-        if len(importantSummary) < 1:
-          return { 'responseType': 'cont', 'response': random.choice(continuations) }
-
-        return {'response_type': 'sumImportant', 'response': bufferBeginning+importantSummary+'"?' }
-
-    elif randomInt == 2:
-        if len(summary_one) < 1:
-          return { 'responseType': 'cont', 'response': random.choice(continuations) }
-        
-        return {'response_type': 'sumGeneral', 'response': bufferBeginning+summary_one+'"?' }
+            return response.format(*[reflect(g) for g in match.groups()])
