@@ -170,7 +170,6 @@ class MainApp extends React.Component{
             <ul className="nav nav-pills pull-right">
               {/*<li><Link to='about'>About</Link></li>*/}
               <li><Link to='journal' onClick={this.userSave}>Save</Link></li>
-              <li><Link to='journal' onClick={this.handleOpenModal}>Settings</Link></li>
               <li><Link to='journal' onClick={this.props.route.auth.logout}>Logout</Link></li>
               <li className="active"><Link to='journal'>Journal Light</Link></li>
             </ul>

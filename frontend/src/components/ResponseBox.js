@@ -36,8 +36,7 @@ export default class ResponseBox extends React.Component{
     }
 
     checkTime() {
-      var responseAiSetting = (localStorage.getItem('aiToggle') === 'true');
-        if (this.state.currentTime - this.state.lastTimeChange > 15000 && responseAiSetting === true) {
+        if (this.state.currentTime - this.state.lastTimeChange > 15000) {
             this.setState({lastTimeChange: Utility.currentTimeInMill()});
             this.responseApi(this.props.entryContent);
           }
@@ -49,16 +48,11 @@ export default class ResponseBox extends React.Component{
       fetch('https://murmuring-thicket-60925.herokuapp.com/api/v2/response', {
           method: 'POST',
           headers: {
-            // Authorization: 'password',
             "Content-Type": "application/json",
           },
           body: JSON.stringify(
             {
                 'entryValue':entryContent,
-                'priorResponse':this.props.priorResponse,
-                'uid': localStorage.getItem('uid'),
-                'password': localStorage.getItem('responsePassword'),
-                'quotaCheck': 'False',
             }),
 
         }).then( (response) => {
