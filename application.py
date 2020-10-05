@@ -36,7 +36,7 @@ cors = CORS(application, origins=os.getenv('ORIGIN') )
 # #Response AI functions
 @application.route('/api/v2/response',methods=['POST'])
 def apiResponse():
-    postData = request.form
+    postData = request.json
     entryValue = str(postData['entryValue'])
     response = generate_response(entryValue)
 
