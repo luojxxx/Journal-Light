@@ -1,11 +1,19 @@
 import os
+import json
 
 from google.cloud import language_v1
 from google.cloud.language_v1 import enums
+from dotenv import load_dotenv
+
+load_dotenv()
 
 scriptpath = os.path.dirname(os.path.realpath(__file__))
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] =  os.path.join(scriptpath, 'google_api_creds.json')
+credentials_path = os.path.join(scriptpath, 'google_api_creds.json')
+credentials = json.loads(os.getenv('GOOGLE_APP_CREDS_JSON'))
+with open(credentials_path, 'w') as json_file:
+  json.dump(credentials, json_file)
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
 def analyze_sentiment(text_content):
     client = language_v1.LanguageServiceClient()
