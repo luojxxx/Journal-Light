@@ -65,7 +65,7 @@
     "react-images-and-video": "git+https://github.com/luojxxx/react-images-and-video.git",
     "react-modal": "^1.6.5",
     "react-recaptcha": "^2.2.6",
-    "react-router": "^3.0.0",
+    "react-router": "^6.30.2",
     "react-textarea-autosize": "^5.2.1",
     "react-toggle": "^3.0.1",
     "whatwg-fetch": "^1.0.0"
